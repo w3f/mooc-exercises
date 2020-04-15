@@ -1,0 +1,17 @@
+[package]
+name = "public_key_solution"
+version = "0.1.0"
+authors = ["laboon <laboon@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rand = "0.7.3"
+num = "0.2.1"
+modinverse = "0.1.1"
+modpow = "1.0.1"
+modexp = "0.2.2"
+rust-crypto = "^0.2"
+num-bigint = { version = "0.2", features = ["rand"] }
+num-traits = "0.2"
