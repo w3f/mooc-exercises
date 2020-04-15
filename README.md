@@ -15,9 +15,11 @@ _Note: It is not absolutely necessary to do any of these exercises, but they wil
 ## Steps
 
 1. Clone down this repository to your local machine.
+1. Go to the `./exercises/` subdirectory, then select the appropriate exercise that you wish to work on.
 1. Read through the comments at the top of the `src/main.rs` file which explains the purpose and goals of the exercise.
 1. For each of the exercises, I have laid out the skeleton of a program.  You should fill in all of the methods with `TODO` in them (you can simply search for TODO using your text editor of choice).
 1. You should start working starting from `TODO 1` and go in order - some of the later TODOs can depend on previous methods working.
 1. You can test to see if your program is working by running `cargo test` from the root directory of that exercise.  This will run the relevant suite of unit tests for that program.
 1. When you are finished, you can run the program using `cargo run`.  I will include sample runs of the code in the comments so you can see some appropriate expected output.
+1. You can always check my solutions in the top-level `./solutions/` (at the same level as the `./exercises/` subdirectory) if you get stuck or simply want to compare how I did it with how you did it.
 
