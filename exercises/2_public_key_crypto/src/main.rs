@@ -67,9 +67,8 @@
 //! ## RSA Algorithm
 //!
 //! This is a relatively straightforward implementation of the paper
-//! "A Method for Obtaining Digital Signatures and Public-Key Cryptosystems"
-//! by River, Shamir and Adleman.
-//! https://people.csail.mit.edu/rivest/Rsapaper.pdf
+//! ["A Method for Obtaining Digital Signatures and Public-Key Cryptosystems"
+//! by Rivest, Shamir and Adleman](https://people.csail.mit.edu/rivest/Rsapaper.pdf).
 //!
 //! If some of the terminology seems strange, don't worry, we will go through
 //! it step by step in the functions.
@@ -123,8 +122,8 @@ enum Function {
 
 /// Check primality of a given unsigned integer
 /// This is a pretty straightforward implementation of the `6k +/- 1` trial
-/// division primality test described here:
-/// https://en.wikipedia.org/wiki/Primality_test#Simple_methods.
+/// division primality test described
+/// [here](https://en.wikipedia.org/wiki/Primality_test#Simple_methods).
 
 fn is_prime(n: u32) -> bool {
     if n <= 3 {
@@ -488,7 +487,7 @@ fn verify_signature(msg: String, sig: u32, pub_key_mod: u32, pub_key_exp: u32) -
     // Step 1: Get the hash value of the message.
     //         Remember there is a get_hash() function for you to use.
         
-    // Step 2: Raise the hash value to the power of pub_key_exp modulo
+    // Step 2: Raise the signature to the power of pub_key_exp modulo
     //         pub_key_mod.  Remember there is a raise_power_modulo() function
     //         for you to use.
 
