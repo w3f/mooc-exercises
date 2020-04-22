@@ -2,7 +2,7 @@
 //!
 //! IMPORTANT - BillHash should not be used for anything important!
 //! It is NOT cryptographically secure and has suboptimal distribution and avalanche effects.
-//! Additionally, its small output size (64 bits) means that it is not truly
+//! Additionally, its small output size (64 bits) means that it is not very
 //! collision-resistant.  However, it is relatively simple and avoids using any magic numbers
 //! or other aspects which may make it difficult to understand.
 //!

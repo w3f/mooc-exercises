@@ -1,8 +1,9 @@
-// Project 1 - Fill in all six of the FIXME methods.  You can run the unit tests to
+// Fill in all six of the TODO methods.  You can run the unit tests to
 // ensure that you have done them correctly.  You may want to comment out other unit
 // tests for other functions (they are grouped by functions) just to minimize distractions.
 // You should not have to edit any code other than in functions with the // FIXME label.
-// I recommend you work on them in the following order:
+// I recommend you work on them in the following order, although this is not
+// as necessary as it was in the previous exercise.
 // 1. strengthen()
 // 2. split()
 // 3. transform()
@@ -16,7 +17,7 @@
 //!
 //! IMPORTANT - BillHash should not be used for anything important!
 //! It is NOT cryptographically secure and has suboptimal distribution and avalanche effects.
-//! Additionally, its small output size (64 bits) means that it is not truly
+//! Additionally, its small output size (64 bits) means that it is not very
 //! collision-resistant.  However, it is relatively simple and avoids using any magic numbers
 //! or other aspects which may make it difficult to understand.
 //!
@@ -120,8 +121,8 @@ fn get_to_hash() -> String {
 /// we will have to add BLOCK_SIZE number of 0's.
 fn strengthen(data: Vec<u8>) -> Vec<u8> {
 
-    // FIXME
-
+    // TODO 1
+    
     // If the number of characters passed in was evenly divisible by BLOCK_SIZE
     // and was not 0, just return the data that was passed in.
 
@@ -181,7 +182,7 @@ fn twiddle(arr: &mut [u8; BLOCK_SIZE]) {
 
 fn transform(cv: u64, arr: [u8; BLOCK_SIZE]) -> u64 {
 
-    // FIXME
+    // TODO 3
 
     // XOR the bytes in initial array against the CV's bytes
 
@@ -189,6 +190,7 @@ fn transform(cv: u64, arr: [u8; BLOCK_SIZE]) -> u64 {
 
     // Return the twiddled bytes as a single u64 value by interpreting the bytes
     // as a little-endian bytes
+    // Note that this is just an arbitrary return value to allow for compilation 
     12
 }
 
@@ -200,12 +202,13 @@ fn transform(cv: u64, arr: [u8; BLOCK_SIZE]) -> u64 {
 
 fn compress(cv: u64, data: Vec<u8>) -> u64 {
 
-    // FIXME
+    // TODO 4
 
     // Convert the vector to an array of u8s of size 8
 
     // Call transform with cv and data as arguments
-
+    
+    // Note that this is just an arbitrary return value to allow for compilation 
     12
 }
 
@@ -222,7 +225,9 @@ fn compress(cv: u64, data: Vec<u8>) -> u64 {
 /// [1, 2, 3, 4, 5, 6, 7, 8, 9] -> [[1, 2, 3, 4, 5, 6, 7, 8], [9, 0, 0, 0, 0, 0, 0, 0]]
 
 fn split(data: Vec<u8>) -> Vec<Vec<u8>> {
-    // FIXME
+    // TODO 2
+    
+    // Note that this is just an arbitrary return value to allow for compilation 
     vec![vec![12]]
 }
 
@@ -236,7 +241,9 @@ fn split(data: Vec<u8>) -> Vec<Vec<u8>> {
 /// 0xDEAD_BEEF_DEAD_BEEF -> 0x2152_4110_2152_4110
 
 fn finalize(to_finalize: u64) -> u64 {
-    // FIXME
+    // TODO 5
+    
+    // Note that this is just an arbitrary return value to allow for compilation 
     12
 }
 
@@ -254,7 +261,7 @@ fn finalize(to_finalize: u64) -> u64 {
 ///         This is the hash value of the string.
 fn bill_hash(to_hash: String) -> u64 {
 
-    // FIXME
+    // TODO 6
 
     // Convert the blocks into a vector of u8s
 
@@ -267,6 +274,7 @@ fn bill_hash(to_hash: String) -> u64 {
 
     // Finalize and return that value as the hash
 
+    // Note that this is just an arbitrary return value to allow for compilation 
     12
 }
 
