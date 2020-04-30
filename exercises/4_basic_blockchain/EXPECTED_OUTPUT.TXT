@@ -1,0 +1,147 @@
+$ cargo run 
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/basic_blockchain_solution`
+Block Number: 0
+From address (hex) > 0
+To address (hex) > b17027d467e
+Amount > 100
+Block Number: 1
+From address (hex) > b17027d467e
+To address (hex) > dbd3743bf0d 
+Amount > 50
+Block Number: 2
+From address (hex) > dbd3743bf0d
+To address (hex) > 99b3ee996f
+Amount > 25
+Block Number: 3
+From address (hex) > 99b3ee996f
+To address (hex) > eccc8796
+Amount > 12
+Block Number: 4
+From address (hex) > x
+0,0x00000000000000,100,0x000b17027d467e,0x00000000000000
+1,0x000b17027d467e,50,0x000dbd3743bf0d,0xd7ccbd5ece70135c
+2,0x000dbd3743bf0d,25,0x000099b3ee996f,0x6bd2269a665925e2
+3,0x000099b3ee996f,12,0x000000eccc8796,0x1cd37e032d15bb08
+
+$ cat > new_file.csv
+0,0x00000000000000,100,0x000b17027d467e,0x00000000000000
+1,0x000b17027d467e,50,0x000dbd3743bf0d,0xd7ccbd5ece70135c
+2,0x000dbd3743bf0d,25,0x000099b3ee996f,0x6bd2269a665925e2
+3,0x000099b3ee996f,12,0x000000eccc8796,0x1cd37e032d15bb08^D
+
+$ more new_file.csv 
+0,0x00000000000000,100,0x000b17027d467e,0x00000000000000
+1,0x000b17027d467e,50,0x000dbd3743bf0d,0xd7ccbd5ece70135c
+2,0x000dbd3743bf0d,25,0x000099b3ee996f,0x6bd2269a665925e2
+3,0x000099b3ee996f,12,0x000000eccc8796,0x1cd37e032d15bb08
+
+$ cargo run new_file.csv 
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/basic_blockchain_solution new_file.csv`
+Block: 0, 0x00000000000000 sent 100 billcoins to 0x000b17027d467e (Prev Hash: 0x00000000000000)
+Block: 1, 0x000b17027d467e sent 50 billcoins to 0x000dbd3743bf0d (Prev Hash: 0xd7ccbd5ece70135c)
+Block: 2, 0x000dbd3743bf0d sent 25 billcoins to 0x000099b3ee996f (Prev Hash: 0x6bd2269a665925e2)
+Block: 3, 0x000099b3ee996f sent 12 billcoins to 0x000000eccc8796 (Prev Hash: 0x1cd37e032d15bb08)
+0x000b17027d467e : 50 billcoins
+0x000000eccc8796 : 12 billcoins
+0x000099b3ee996f : 13 billcoins
+0x000dbd3743bf0d : 25 billcoins
+Blockchain valid!
+
+$ cargo run 1_sending_but_has_none.csv
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/basic_blockchain_solution 1_sending_but_has_none.csv`
+Block: 0, 0x0008200de88a9d sent 5 billcoins to 0x000d9827301ffe (Prev Hash: 0x00000000000000)
+Blockchain invalid: Line 0: Account 0x0008200de88a9d has 0 billcoins; it cannot send 5
+
+$ cargo run 1_sending_more_than_has.csv 
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/basic_blockchain_solution 1_sending_more_than_has.csv`
+Block: 0, 0x00000000000000 sent 1000 billcoins to 0x098aa567d48672 (Prev Hash: 0x00000000000000)
+Block: 1, 0x098aa567d48672 sent 10000 billcoins to 0x00441521ab6d00 (Prev Hash: 0xbaaa7420ed8d8166)
+Blockchain invalid: Line 1: Account 0x098aa567d48672 only has 1000 billcoins; it cannot send 10000
+
+$ cargo run 2_has_billcoins_tries_to_send_to_0.csv
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/basic_blockchain_solution 2_has_billcoins_tries_to_send_to_0.csv`
+Block: 0, 0x00000000000000 sent 100 billcoins to 0x00c352e7cb3663 (Prev Hash: 0x00000000000000)
+Block: 1, 0x00000000000000 sent 100 billcoins to 0x0fe238d5090ed0 (Prev Hash: 0x60ec17d0cf0c914d)
+Block: 2, 0x00c352e7cb3663 sent 10 billcoins to 0x00000000000000 (Prev Hash: 0x3b8f76d52be92803)
+Block: 3, 0x0fe238d5090ed0 sent 4 billcoins to 0x00c352e7cb3663 (Prev Hash: 0xc856335d6f52ab05)
+Blockchain invalid: Line 2: Account 0x00c352e7cb3663 tried to send to address 0x00000000000000
+
+$ cargo run 3_bad_initial_prev_hash.csv
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/basic_blockchain_solution 3_bad_initial_prev_hash.csv`
+Block: 0, 0x00000000000000 sent 10000 billcoins to 0x00000a3b6cfab2 (Prev Hash: 0x00000000000001)
+Block: 1, 0x00000000000000 sent 11111 billcoins to 0x0fe238d5090ed0 (Prev Hash: 0xb2e1005b562dea63)
+Block: 2, 0x0fe238d5090ed0 sent 2222 billcoins to 0x00004dd2dd519f (Prev Hash: 0x12a0441959a3f238)
+Block: 3, 0x00000000000000 sent 32 billcoins to 0x00304c9424a740 (Prev Hash: 0xfab347962c733e46)
+Block: 4, 0x00304c9424a740 sent 16 billcoins to 0x000006639ad72e (Prev Hash: 0x7bbb03eab47979c8)
+Block: 5, 0x000006639ad72e sent 8 billcoins to 0x00000e0fe7cd5a (Prev Hash: 0xa25f7d4abbac23c)
+Blockchain invalid: Line 0: Prev hash was expected to be 0x00000000000000, not 0x00000000000001
+
+$ cargo run 4_bad_prev_hash.csv 
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/basic_blockchain_solution 4_bad_prev_hash.csv`
+Block: 0, 0x00000000000000 sent 10000 billcoins to 0x00000a3b6cfab2 (Prev Hash: 0x00000000000000)
+Block: 1, 0x00000000000000 sent 11111 billcoins to 0x0fe238d5090ed0 (Prev Hash: 0xb2e1005b562dea63)
+Block: 2, 0x0fe238d5090ed0 sent 2222 billcoins to 0x00004dd2dd519f (Prev Hash: 0x12a0441959a3f238)
+Block: 3, 0x00000000000000 sent 32 billcoins to 0x00304c9424a740 (Prev Hash: 0xfab347962c733e46)
+Block: 4, 0x00304c9424a740 sent 16 billcoins to 0x000006639ad72e (Prev Hash: 0x123456789abcdef)
+Block: 5, 0x000006639ad72e sent 8 billcoins to 0x00000e0fe7cd5a (Prev Hash: 0xa25f7d4abbac23c)
+Blockchain invalid: Line 4: Prev hash was expected to be 0x7bbb03eab47979c8, not 0x123456789abcdef
+
+$ cargo run 5_small_works.csv 
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/basic_blockchain_solution 5_small_works.csv`
+Block: 0, 0x00000000000000 sent 100 billcoins to 0x00000008912ab4 (Prev Hash: 0x00000000000000)
+Block: 1, 0x00000008912ab4 sent 50 billcoins to 0x00000000aa4322 (Prev Hash: 0xe993e63b9d3dc7c3)
+Block: 2, 0x00000000000000 sent 200 billcoins to 0x0000000ca667ab (Prev Hash: 0xb746d963c954b5bc)
+Block: 3, 0x00000000aa4322 sent 1 billcoins to 0x0000000590bbd4 (Prev Hash: 0xd36f3c92a5f9b115)
+Block: 4, 0x00000008912ab4 sent 3 billcoins to 0x000000771df211 (Prev Hash: 0xed676b7c6726080c)
+Block: 5, 0x00000000000000 sent 4 billcoins to 0x0000000e7ff523 (Prev Hash: 0xda39d4ad4048c172)
+0x00000008912ab4 : 47 billcoins
+0x0000000ca667ab : 200 billcoins
+0x0000000590bbd4 : 1 billcoins
+0x000000771df211 : 3 billcoins
+0x00000000aa4322 : 49 billcoins
+0x0000000e7ff523 : 4 billcoins
+Blockchain valid!
+
+$ cargo run 5_large_works.csv
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/basic_blockchain_solution 5_large_works.csv`
+Block: 0, 0x00000000000000 sent 1000 billcoins to 0x0007c00a4788f2 (Prev Hash: 0x00000000000000)
+Block: 1, 0x00000000000000 sent 500 billcoins to 0x000000b0e70a2b (Prev Hash: 0xb3c7c7b0a06860a2)
+Block: 2, 0x00000000000000 sent 4000 billcoins to 0x00000bdc17fb07 (Prev Hash: 0xa7bb8f80f0ba7bf8)
+Block: 3, 0x00000bdc17fb07 sent 200 billcoins to 0x000000b0e70a2b (Prev Hash: 0x1397dd1d27795d0d)
+Block: 4, 0x00000000000000 sent 12345 billcoins to 0x000000ba0642fc (Prev Hash: 0xd7fc05e1b1a3fe8a)
+Block: 5, 0x000000ba0642fc sent 2345 billcoins to 0x00000234dc02a4 (Prev Hash: 0x1be97dec5c40b887)
+Block: 6, 0x00000000000000 sent 256 billcoins to 0x00000061cf18a5 (Prev Hash: 0x425883692ccc102f)
+Block: 7, 0x00000061cf18a5 sent 64 billcoins to 0x0000eb5b72d016 (Prev Hash: 0x3e0cc420b217bcba)
+Block: 8, 0x00000061cf18a5 sent 64 billcoins to 0x00000d8799bce5 (Prev Hash: 0xef6d5498ccaede67)
+Block: 9, 0x00000061cf18a5 sent 64 billcoins to 0x000002f06a148a (Prev Hash: 0x905aa8f045e11d03)
+Block: 10, 0x00000000000000 sent 1 billcoins to 0x00000dd393aa79 (Prev Hash: 0x6427aa5f3e2d6d9d)
+Block: 11, 0x00000dd393aa79 sent 1 billcoins to 0x000000e5227325 (Prev Hash: 0xdd9238a29c580843)
+Block: 12, 0x000000e5227325 sent 1 billcoins to 0x00000dd393aa79 (Prev Hash: 0xd09fcc476b5dc84f)
+Block: 13, 0x00000000000000 sent 100 billcoins to 0x000001f8366f0e (Prev Hash: 0x9fcc5466c9f96816)
+Block: 14, 0x000001f8366f0e sent 10 billcoins to 0x00000242af1d1a (Prev Hash: 0x94770fc3f0eb8e38)
+Block: 15, 0x00000000000000 sent 100000 billcoins to 0x000ecb717fe905 (Prev Hash: 0x133eece233eab4e2)
+Block: 16, 0x000ecb717fe905 sent 1 billcoins to 0x0000bdc17fb07b (Prev Hash: 0xbb77b832baae4ba9)
+0x0000bdc17fb07b : 1 billcoins
+0x00000bdc17fb07 : 3800 billcoins
+0x0007c00a4788f2 : 1000 billcoins
+0x000000b0e70a2b : 700 billcoins
+0x00000234dc02a4 : 2345 billcoins
+0x000001f8366f0e : 90 billcoins
+0x000000ba0642fc : 10000 billcoins
+0x00000d8799bce5 : 64 billcoins
+0x00000061cf18a5 : 64 billcoins
+0x000002f06a148a : 64 billcoins
+0x00000242af1d1a : 10 billcoins
+0x0000eb5b72d016 : 64 billcoins
+0x00000dd393aa79 : 1 billcoins
+0x000ecb717fe905 : 99999 billcoins
+Blockchain valid!
