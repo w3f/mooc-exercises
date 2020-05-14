@@ -345,7 +345,7 @@ fn print_keys(n: u32, d: u32, e: u32) {
 
 // Given a random number generator, produce two distinct pseudorandom primes.
 
-fn generate_two_primes(mut rng: &mut rand::prelude::ThreadRng) -> (u32, u32) {
+fn generate_two_primes(rng: &mut rand::prelude::ThreadRng) -> (u32, u32) {
 
     // TODO 1
     
@@ -417,7 +417,7 @@ fn compute_public_exponent(e: u32, n: u32) -> u32 {
 // Since the modulus is shared between public and private keys, there is no
 // no need to send it back twice.
 
-fn generate_key_pair(mut rng: &mut rand::prelude::ThreadRng) -> (u32, u32, u32) {
+fn generate_key_pair(rng: &mut rand::prelude::ThreadRng) -> (u32, u32, u32) {
 
     // TODO 4
     
